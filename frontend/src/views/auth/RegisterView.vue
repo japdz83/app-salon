@@ -1,4 +1,28 @@
-<script setup></script>
+<script setup>
+import { inject } from 'vue'
+import { reset } from '@formkit/vue'
+import AuthAPI from '../../api/AuthAPI'
+
+const toast = inject('toast')
+
+
+const handleSubmit = async ({password_confirm, ...formData}) =>{
+	try {
+		const { data } = await AuthAPI.register(formData)
+		toast.open({
+			message: data.msg,
+			type: 'success'
+		})
+		reset('registerForm')
+	} catch (error) {
+		console.log(error.response.data.msg)
+		toast.open({
+			message: error.response.data.msg,
+			type: 'error'
+		})
+	}
+}
+</script>
 
 <template>
 	<div>
@@ -10,9 +34,11 @@
 		</p>
 
 		<FormKit
+			id="registerForm"
 			type="form"
 			:actions="false"
 			incomplete-message="No se pudo enviar, revisa las notificaciones"
+			@submit="handleSubmit"
 		>
 			<FormKit
 				type="text"
@@ -33,7 +59,7 @@
 				placeholder="Email de Registro"
 				validation="required | email"
 				:validation-messages="{
-					required:'El nombre es obligatorio',
+					required:'El email es obligatorio',
 					email: 'El Email no es valido'
 				}"
 			/>
@@ -45,7 +71,7 @@
 				placeholder="Password de Usuario - Min 8 caracteres"
 				validation="required | length:8"
 				:validation-messages="{
-					required:'El nombre es obligatorio',
+					required:'El Password es obligatorio',
 					length: 'El Password debe contener al menos 8 caracteres'
 				}"
 			/>
@@ -57,7 +83,7 @@
 				placeholder="Repite el Password"
 				validation="required | confirm"
 				:validation-messages="{
-					required:'El nombre es obligatorio',
+					required:'El Password es obligatorio',
 					confirm: 'Los Password no son iguales'
 				}"
 			/>

@@ -1,9 +1,10 @@
 <script setup></script>
 
 <template>
-	<div>
-		<h1>Hola Mundo My Appointment View</h1>
-	</div>
+	<h2 class="text-4xl font-extrabold text-white mt-10">Mis Citas</h2>
+	<p class="text-white text-lg mt-5">
+		A continuación podrás administrar tus próximas citas
+	</p>
 </template>
 
 <style scoped></style>

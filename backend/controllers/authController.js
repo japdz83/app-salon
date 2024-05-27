@@ -1,5 +1,6 @@
 import { sendEmailVerification } from "../emails/authEmailService.js"
 import User from "../models/User.js"
+import { generateJWT } from "../utils/index.js"
 
 const register = async (req, res) => {
 
@@ -91,8 +92,10 @@ const login = async (req, res) => {
 
     // Comprobar el password
     if (await user.checkPassword(password)) {
+
+        const token = generateJWT(user._id)
         res.json({
-            msg: 'Usuario Autenticado'
+            token
         })
     } else {
         const error = new Error('El password es incorrecto')
@@ -103,9 +106,17 @@ const login = async (req, res) => {
 
 }
 
+const user = async (req, res) => {
+    const { user } = req
+    res.json(
+        user
+    )
+}
+
 
 export {
     register,
     verifyAccount,
-    login
+    login,
+    user
 }
