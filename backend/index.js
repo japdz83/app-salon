@@ -6,6 +6,8 @@ import cors from 'cors'
 import { db } from './config/db.js'
 import servicesRoutes from './routes/servicesRoutes.js'
 import authRoutes from './routes/authRoutes.js'
+import appointmentsRoutes from './routes/appointmentsRoutes.js'
+import usersRoutes from './routes/usersRoutes.js'
 
 // Variables de entorno
 dotenv.config()
@@ -53,6 +55,9 @@ app.use(cors({
 // Definir una ruta
 app.use('/api/services', servicesRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/appointments', appointmentsRoutes)
+app.use('/api/users', usersRoutes)
+
 
 
 // Definir puerto

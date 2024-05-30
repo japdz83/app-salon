@@ -94,6 +94,7 @@ const login = async (req, res) => {
     if (await user.checkPassword(password)) {
 
         const token = generateJWT(user._id)
+        console.log(token)
         res.json({
             token
         })

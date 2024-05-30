@@ -8,9 +8,10 @@ const router = useRouter()
 
 const handleSubmit = async (formData) =>{
 	try {
-		const { data: token } = await AuthAPI.login(formData)
+		const { data: { token } } = await AuthAPI.login(formData)
 		localStorage.setItem('AUTH_TOKEN', token)
-		router.push({ name: 'my-appointment' })
+		router.push({ name: 'my-appointments' })
+		console.log(token)
 	} catch (error) {
 		console.log(error)
 		toast.open({

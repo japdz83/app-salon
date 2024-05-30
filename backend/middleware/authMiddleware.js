@@ -4,15 +4,16 @@ import User from '../models/User.js'
 const authMiddleware = async (req, res, next) => {
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+
         try {
-            const token = req.headers.authorization.split('')[1]
+            const token = req.headers.authorization.split(' ')[1]
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
             req.user = await User.findById(decoded.id).select(
                 "-password -verified -token -__v"
             )
             next()
         } catch {
-            console.log(error)
+            // console.log(error)
             const error = new Error('Token no valido')
             res.status(403).json({
                 msg: error.message
@@ -25,6 +26,7 @@ const authMiddleware = async (req, res, next) => {
         })
 
     }
+
 
 }
 

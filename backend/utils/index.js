@@ -25,6 +25,7 @@ function handleNotFoundError(message, res) {
 const uniqueId = () => Date.now().toString(32) + Math.random().toString(32).substring(2)
 
 const generateJWT = (id) => {
+    console.log('Desde JWT', id)
     const token = jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
     })

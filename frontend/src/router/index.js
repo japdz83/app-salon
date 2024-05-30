@@ -19,7 +19,7 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'my-appointment',
+          name: 'my-appointments',
           component: () => import('../views/appointments/MyAppointmentView.vue')
         },
         {
@@ -81,10 +81,12 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
   if (requiresAuth) {
     try {
-      const { data } = await AuthAPI.auth()
+      await AuthAPI.auth()
+      next()
       console.log(data)
     } catch (error) {
       console.log(error.response.data.msg)
+      next({ name: 'login' })
     }
   } else {
     next()
