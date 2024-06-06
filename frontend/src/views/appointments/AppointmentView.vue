@@ -78,7 +78,7 @@ const disableDate = (date) => {
 			<button
 				v-if="appointments.isValidReservation"
 				class="w-full md:w-auto bg-blue-500 p-4 rounded-lg uppercase font-black text-white transition-colors hover:bg-blue-600"
-				@click="appointments.createAppointment"
+				@click="appointments.saveAppointment"
 			>
 				Confirmar Reservación
 			</button>
