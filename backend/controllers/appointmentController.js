@@ -113,7 +113,7 @@ const updateAppointment = async (req, res) => {
 }
 
 const deleteAppointment = async (req, res) => {
-    console.log('Desde deleteAppointments')
+    // console.log('Desde deleteAppointments')
     const { id } = req.params
 
     // Validar por Object ID

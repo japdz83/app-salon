@@ -144,11 +144,37 @@ const verifyPasswordResetToken = async (req, res) => {
 
     if (!isValidToken) {
         const error = new Error('Hubo un error, Token no válido')
+        return res.status(400).json({
+            msg: error.message
+        })
     }
+
+    res.json({ msg: 'Token Válido' })
 }
 
 const updatePassword = async (req, res) => {
-    console.log('Actualizando password')
+    const { token } = req.params
+
+    const user = await User.findOne({ token })
+
+    if (!user) {
+        const error = new Error('Hubo un error, Token no válido')
+        return res.status(400).json({
+            msg: error.message
+        })
+    }
+
+    const { password } = req.body
+    try {
+        user.token = ''
+        user.password = password
+        await user.save()
+        res.json({
+            msg: 'Password modificado correctamente'
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const user = async (req, res) => {
@@ -158,6 +184,19 @@ const user = async (req, res) => {
     )
 }
 
+const admin = async (req, res) => {
+    const { user } = req
+    // console.log(user)
+    if (!user.admin) {
+        const error = new Error('Acción no válida')
+        return res.status(403).json({
+            msg: error.message
+        })
+    }
+    res.json(
+        user
+    )
+}
 
 
 export {
@@ -168,4 +207,5 @@ export {
     verifyPasswordResetToken,
     updatePassword,
     user,
+    admin
 }

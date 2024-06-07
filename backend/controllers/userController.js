@@ -1,4 +1,4 @@
-import Appoinment from "../models/Appointment.js"
+import Appointment from "../models/Appointment.js"
 
 const getUsersAppointments = async (req, res) => {
     const { user } = req.params
@@ -12,13 +12,14 @@ const getUsersAppointments = async (req, res) => {
     }
 
     try {
-        const appointment = await Appoinment.find({
-            user: user,
-            date: {
-                $gte: new Date()
-            }
-        }).populate('services').sort({ date: 'asc' })
-        res.json(appointment)
+        const query = req.user.admin ? { date: { $gte: new Date() } } : { user, date: { $gte: new Date() } }
+        const appointments = await Appointment
+            .find(query)
+            .populate('services')
+            .populate({ path: 'user', select: 'name email' })
+            .sort({ date: 'asc' })
+        res.json(appointments)
+        console.log(appointments)
     } catch (error) {
         console.log(error)
     }

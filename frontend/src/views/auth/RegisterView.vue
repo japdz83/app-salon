@@ -15,7 +15,7 @@ const handleSubmit = async ({password_confirm, ...formData}) =>{
 		})
 		reset('registerForm')
 	} catch (error) {
-		console.log(error.response.data.msg)
+		// console.log(error.response.data.msg)
 		toast.open({
 			message: error.response.data.msg,
 			type: 'error'

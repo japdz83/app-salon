@@ -43,5 +43,3 @@ const user = useUseStore()
 		<RouterView />
 	</main>
 </template>
-
-<style scoped></style>
