@@ -48,13 +48,13 @@ export const useAppointmentsStore = defineStore('appointments', () => {
     })
 
     function setSelectedAppointment(appointment) {
-        console.log(appointment)
+        // console.log(appointment)
         services.value = appointment.services
         date.value = converToDDMMYYYY(appointment.date)
         time.value = appointment.time
         appointmentId.value = appointment._id
 
-        console.log(appointmentId.value)
+        // console.log(appointmentId.value)
     }
 
     function onServiceSelected(service) {
@@ -67,7 +67,6 @@ export const useAppointmentsStore = defineStore('appointments', () => {
             }
             services.value.push(service)
         }
-
     }
 
     async function saveAppointment() {

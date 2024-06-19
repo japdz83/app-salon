@@ -5,7 +5,6 @@ import AdminAppointment from '@/components/AdminAppointment.vue'
 const user = useUseStore()
 console.log(user.userAppointments)
 console.log(user.noAppointments)
-// console.log(object)
 </script>
 
 <template>

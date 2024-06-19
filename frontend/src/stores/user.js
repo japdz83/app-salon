@@ -38,6 +38,7 @@ export const useUseStore = defineStore('user', () => {
     const getUserName = computed(() => user.value?.name ? user.value?.name : '')
 
     const noAppointments = computed(() => userAppointments.value.length === 0)
+    // console.log(noAppointments)
 
 
     return {

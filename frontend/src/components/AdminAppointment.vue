@@ -1,5 +1,5 @@
 <script setup>
-// import { displayDate } from '../helpers/date'
+import { displayDate } from '@/helpers/date'
 import { formatCurrency } from '../helpers/index.js';
 
 defineProps({
@@ -15,7 +15,7 @@ console.log(appointment.services)
 		<p class="text-gray-500 font-black">
 			Fecha:
 			<span class="font-light">
-				{{  appointment.date  }}
+				{{  displayDate(appointment.date)  }}
 			</span>
 			Hora: <span class="font-light"> {{ appointment.time }} Horas.</span>
 		</p>
